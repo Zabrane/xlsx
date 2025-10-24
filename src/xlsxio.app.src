@@ -1,7 +1,7 @@
 {application, xlsxio,
  [
-  {description, ""},
-  {vsn, "1"},
+  {description, "Reader & writer for Xlsx in Erlang "},
+  {vsn, "1.0.0"},
   {registered, []},
   {applications, [
                   kernel,
