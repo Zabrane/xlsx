@@ -251,7 +251,7 @@ digits1(Float, Exp, Frac) ->
 
 digits(N) when is_integer(N) ->
 	integer_to_list(N);
-digits(0.0) ->
+digits(+0.0) ->
 	"0.0";
 digits(Float) ->
 	{Frac1, Exp1} = frexp_int(Float),
