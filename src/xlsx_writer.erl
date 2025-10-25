@@ -57,7 +57,7 @@ normalize_dimension(Rows)->
 				 end,
 			{MC,ML}
 		end,{0,0},Rows),
-	["A1:" , xlsx_util:get_field_string(MaxColumn ,MaxLine)].
+	["<dimension ref=\"A1:" , xlsx_util:get_field_string(MaxColumn ,MaxLine), "\"/>"].
 
 put_context(XlsxHandle,Context)->
 	put({xlsx_write_context,XlsxHandle},Context).
@@ -243,7 +243,6 @@ do_workbook_relation(#xlsx_write_context{sheets = Sheets},Acc)->
 					I = integer_to_list(Id),
 					["<Relationship Id=\"sheet" ,  I ,"\" Type=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet\" Target=\"worksheets/sheet" ,  I , ".xml\"/>"]
 				end,lists:seq(1,length(Sheets))),
-					"<Relationship Id=\"rId99\" Type=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships/sharedStrings\" Target=\"xl/sharedStrings.xml\"/>",
 			"</Relationships>"
 			]
 			}|Acc
@@ -260,7 +259,6 @@ do_content_types(#xlsx_write_context{sheets = Sheets},Acc)->
 			"<Override PartName=\"/docProps/app.xml\" ContentType=\"application/vnd.openxmlformats-officedocument.extended-properties+xml\"/>"
 			"<Override PartName=\"/xl/workbook.xml\" ContentType=\"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml\"/>"
 			"<Override PartName=\"/xl/_rels/workbook.xml.rels\" ContentType=\"application/vnd.openxmlformats-package.relationships+xml\"/>"
-			"<Override PartName=\"/xl/sharedStrings.xml\" ContentType=\"application/vnd.openxmlformats-officedocument.spreadsheetml.sharedStrings+xml\"/>"
 			,
 			lists:map(
 				fun(Id)->
